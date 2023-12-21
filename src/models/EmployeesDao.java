@@ -103,6 +103,7 @@ public class EmployeesDao {
         List<Employees> list_employees = new ArrayList();
         String query = "SELECT * FROM employees ORDER BY rol ASC";
         String query_search_employee = "SELECT * FROM employees WHERE id LIKE '%" + value + "%'";
+        
         try {
             conn = cn.getConnection();
             if (value.equalsIgnoreCase("")) {
@@ -131,7 +132,7 @@ public class EmployeesDao {
         }
         return list_employees;
     }
-    
+
     //Modificar empleado
     public boolean updateEmployeeQuery(Employees employee) {
         String query = "UPDATE employees SET full_name = ?, username = ?, address = ?, telephone = ?, email = ?, rol = ?, update = ?"
@@ -157,32 +158,32 @@ public class EmployeesDao {
             return false;
         }
     }
-    
+
     //Eliminar empleado
-    public boolean deleteEmployeeQuery(int id){
+    public boolean deleteEmployeeQuery(int id) {
         String query = "DELETE FROM employees WHERE id = " + id;
-        try{
+        try {
             conn = cn.getConnection();
             pst = conn.prepareStatement(query);
             pst.execute();
             return true;
-        }catch(SQLException e){
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No puede eliminar un empleado que tenga relación con otra tabla " + e);
             return false;
         }
     }
-    
+
     //Cambiar la contraseña
-    public boolean updateEmployeePassword(Employees employee){
+    public boolean updateEmployeePassword(Employees employee) {
         String query = "UPDATE employees SET password = ? WHERE username = '" + username_user + "'";
-        
-        try{
+
+        try {
             conn = cn.getConnection();
             pst = conn.prepareStatement(query);
             pst.setString(1, employee.getPassword());
             pst.executeUpdate();
             return true;
-        }catch(SQLException e){
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error al cambiar la contraseña " + e);
             return false;
         }
