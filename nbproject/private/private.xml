@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/juand/NetBeansProjects/Java/Farmacia/src/models/EmployeesDao.java</file>
-            <file>file:/home/juand/NetBeansProjects/Java/Farmacia/src/models/CustomersDao.java</file>
-            <file>file:/home/juand/NetBeansProjects/Java/Farmacia/src/models/Customers.java</file>
-            <file>file:/home/juand/NetBeansProjects/Java/Farmacia/src/models/Employees.java</file>
-            <file>file:/home/juand/NetBeansProjects/Java/Farmacia/src/models/ConnectionMySQL.java</file>
+            <file>file:/home/juand/NetBeansProjects/Java/Farmacia/src/models/SuppliersDao.java</file>
+            <file>file:/home/juand/NetBeansProjects/Java/Farmacia/src/models/ProductsDao.java</file>
+            <file>file:/home/juand/NetBeansProjects/Java/Farmacia/src/models/CategoriesDao.java</file>
+            <file>file:/home/juand/NetBeansProjects/Java/Farmacia/src/models/Categories.java</file>
+            <file>file:/home/juand/NetBeansProjects/Java/Farmacia/src/models/Products.java</file>
         </group>
     </open-files>
 </project-private>
