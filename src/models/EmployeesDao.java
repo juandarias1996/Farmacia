@@ -73,7 +73,7 @@ public class EmployeesDao {
     //Registrar empleado
     public boolean registerEmployeeQuery(Employees employee) {
         String query = "INSERT INTO employees(id, full_name, username, address, telephone, email, password, rol, created"
-                + "update) VALUES(?,?,?,?,?,?,?,?,?,?)";
+                + "updated) VALUES(?,?,?,?,?,?,?,?,?,?)";
 
         Timestamp datetime = new Timestamp(new Date().getTime());
 
@@ -135,7 +135,7 @@ public class EmployeesDao {
 
     //Modificar empleado
     public boolean updateEmployeeQuery(Employees employee) {
-        String query = "UPDATE employees SET full_name = ?, username = ?, address = ?, telephone = ?, email = ?, rol = ?, update = ?"
+        String query = "UPDATE employees SET full_name = ?, username = ?, address = ?, telephone = ?, email = ?, rol = ?, updated = ?"
                 + "WHERE id = ?";
 
         Timestamp datetime = new Timestamp(new Date().getTime());
