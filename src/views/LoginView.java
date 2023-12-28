@@ -6,14 +6,11 @@ package views;
 
 import Libs.TextPrompt;
 import controllers.LoginController;
-import java.awt.event.KeyEvent;
 import static java.awt.event.KeyEvent.VK_BACK_SPACE;
 import static java.awt.event.KeyEvent.VK_DELETE;
-import static java.awt.event.KeyEvent.VK_DOWN;
 import static java.awt.event.KeyEvent.VK_LEFT;
 import static java.awt.event.KeyEvent.VK_RIGHT;
-import javax.swing.JComponent;
-import javax.swing.JOptionPane;
+import static java.awt.event.KeyEvent.VK_SPACE;
 import models.Employees;
 import models.EmployeesDao;
 
@@ -60,7 +57,7 @@ public class LoginView extends javax.swing.JFrame {
         btn_enter = new javax.swing.JButton();
         txt_username = new javax.swing.JTextField();
         txt_password = new javax.swing.JPasswordField();
-        chk_mostrarcontraseña = new javax.swing.JCheckBox();
+        chk_showpassword = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         Wallpaper = new javax.swing.JLabel();
 
@@ -79,27 +76,11 @@ public class LoginView extends javax.swing.JFrame {
 
         btn_enter.setText("INGRESAR");
         btn_enter.setAlignmentY(0.0F);
-        btn_enter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_enterActionPerformed(evt);
-            }
-        });
         jPanel1.add(btn_enter, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, -1, -1));
 
         txt_username.setToolTipText("");
         txt_username.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txt_username.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txt_usernameMouseClicked(evt);
-            }
-        });
         txt_username.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_usernameKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_usernameKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_usernameKeyTyped(evt);
             }
@@ -108,33 +89,22 @@ public class LoginView extends javax.swing.JFrame {
 
         txt_password.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txt_password.setPreferredSize(new java.awt.Dimension(65, 24));
-        txt_password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_passwordActionPerformed(evt);
-            }
-        });
         txt_password.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_passwordKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_passwordKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_passwordKeyTyped(evt);
             }
         });
         jPanel1.add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 180, -1));
 
-        chk_mostrarcontraseña.setBackground(jPanel1.getBackground());
-        chk_mostrarcontraseña.setForeground(new java.awt.Color(255, 255, 255));
-        chk_mostrarcontraseña.setText("Mostrar contraseña");
-        chk_mostrarcontraseña.addActionListener(new java.awt.event.ActionListener() {
+        chk_showpassword.setBackground(jPanel1.getBackground());
+        chk_showpassword.setForeground(new java.awt.Color(255, 255, 255));
+        chk_showpassword.setText("Mostrar contraseña");
+        chk_showpassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chk_mostrarcontraseñaActionPerformed(evt);
+                chk_showpasswordActionPerformed(evt);
             }
         });
-        jPanel1.add(chk_mostrarcontraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
+        jPanel1.add(chk_showpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 490, 420));
 
@@ -148,117 +118,32 @@ public class LoginView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void chk_mostrarcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk_mostrarcontraseñaActionPerformed
-        // TODO add your handling code here:
-        if (chk_mostrarcontraseña.isSelected()) {
-            txt_password.setEchoChar((char) 0);
-        } else {
-            txt_password.setEchoChar('*');
-        }
-    }//GEN-LAST:event_chk_mostrarcontraseñaActionPerformed
-
-    private void txt_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_passwordActionPerformed
-
-    private void txt_usernameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_usernameMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_usernameMouseClicked
-
-    private void btn_enterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_enterActionPerformed
-
-    private void txt_passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyReleased
-        // TODO add your handling code here:
-        //Se detecta que se presionó la tecla enter
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            //Obtener los datos de la vista
-            String user = this.txt_username.getText().trim();
-            String pass = String.valueOf(this.txt_password.getPassword());
-            EmployeesDao employees_dao = new EmployeesDao();
-
-            //Validar que los campos no esten vacíos
-            if (!user.equals("") || !pass.equals("")) {
-                //Pasar los parámetros al método login
-                employee = employees_dao.loginQuery(user, pass);
-                //Verificar la existencia del usuario
-                if (employee.getUsername() != null) {
-                    if (employee.getRol().equals("Administrador")) {
-                        SystemView admin = new SystemView();
-                        admin.setVisible(true);
-                    } else {
-                        SystemView aux = new SystemView();
-                        aux.setVisible(true);
-                    }
-                    this.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrect@");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Los campos están vacíos");
-            }
-        }
-    }//GEN-LAST:event_txt_passwordKeyReleased
-
-    private void txt_usernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usernameKeyReleased
-        // TODO add your handling code here:
-        //Se detecta que se presionó la tecla enter
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            if(!this.txt_username.getText().trim().equals("")){
-                //Se transfiere el foco al siguiente Jtextflield, Jpasswordfield, etc...
-                JOptionPane.showMessageDialog(null, "Por favor introduzca la contraseña");
-                //((JComponent) evt.getSource()).transferFocus();
-            }else{
-                JOptionPane.showMessageDialog(null, "Por favor introduzca un usuario válido");
-            }
-        }
-    }//GEN-LAST:event_txt_usernameKeyReleased
-
-    private void txt_usernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usernameKeyPressed
-        // TODO add your handling code here:
-        //Limita que se escriban espacios y carácteres no deseados y se habilita teclas específicas
-        if((evt.getKeyChar() < '0' || evt.getKeyChar() > '9') && (evt.getKeyChar() < 'A' || evt.getKeyChar() > 'Z') 
-                && (evt.getKeyChar() < 'a' || evt.getKeyChar() > 'z') && evt.getKeyCode() != VK_BACK_SPACE && evt.getKeyCode() != VK_DELETE 
-                && evt.getKeyCode() != VK_LEFT && evt.getKeyCode() != VK_RIGHT){
-            //System.out.println(evt.getKeyCode());
-            evt.consume();
-        }
-    }//GEN-LAST:event_txt_usernameKeyPressed
-
     private void txt_usernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usernameKeyTyped
         // TODO add your handling code here:
         //Limita que se escriban espacios y carácteres no deseados y se habilita teclas específicas
         if((evt.getKeyChar() < '0' || evt.getKeyChar() > '9') && (evt.getKeyChar() < 'A' || evt.getKeyChar() > 'Z') 
                 && (evt.getKeyChar() < 'a' || evt.getKeyChar() > 'z') && evt.getKeyCode() != VK_BACK_SPACE && evt.getKeyCode() != VK_DELETE 
                 && evt.getKeyCode() != VK_LEFT && evt.getKeyCode() != VK_RIGHT){
-            //System.out.println(evt.getKeyCode());
             evt.consume();
         }
     }//GEN-LAST:event_txt_usernameKeyTyped
 
-    private void txt_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyPressed
-        // TODO add your handling code here:
-        //Limita que se escriban espacios y carácteres no deseados y se habilita teclas específicas
-        if((evt.getKeyChar() < '0' || evt.getKeyChar() > '9') && (evt.getKeyChar() < 'A' || evt.getKeyChar() > 'Z') 
-                && (evt.getKeyChar() < 'a' || evt.getKeyChar() > 'z') && evt.getKeyCode() != VK_BACK_SPACE && evt.getKeyCode() != VK_DELETE 
-                && evt.getKeyCode() != VK_LEFT && evt.getKeyCode() != VK_RIGHT){
-            //System.out.println(evt.getKeyCode());
-            evt.consume();
-        }
-    }//GEN-LAST:event_txt_passwordKeyPressed
-
     private void txt_passwordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyTyped
-        // TODO add your handling code here:
         //Limita que se escriban espacios y carácteres no deseados y se habilita teclas específicas
-        if((evt.getKeyChar() < '0' || evt.getKeyChar() > '9') && (evt.getKeyChar() < 'A' || evt.getKeyChar() > 'Z') 
-                && (evt.getKeyChar() < 'a' || evt.getKeyChar() > 'z') && evt.getKeyCode() != VK_BACK_SPACE && evt.getKeyCode() != VK_DELETE 
-                && evt.getKeyCode() != VK_LEFT && evt.getKeyCode() != VK_RIGHT){
-            //System.out.println(evt.getKeyCode());
-            evt.consume();
-        }
+        if(evt.getKeyChar() == VK_SPACE){evt.consume();}
     }//GEN-LAST:event_txt_passwordKeyTyped
 
+    private void chk_showpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk_showpasswordActionPerformed
+        //Se muestra la contraseña al seleccionar el checkbox de mostrar contraseña
+        if(chk_showpassword.isSelected()){
+                txt_password.setEchoChar((char) 0);
+            } else {
+                txt_password.setEchoChar('*');
+            }
+    }//GEN-LAST:event_chk_showpasswordActionPerformed
+
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -297,7 +182,7 @@ public class LoginView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Wallpaper;
     public javax.swing.JButton btn_enter;
-    private javax.swing.JCheckBox chk_mostrarcontraseña;
+    public javax.swing.JCheckBox chk_showpassword;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
