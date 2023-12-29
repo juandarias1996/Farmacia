@@ -12,7 +12,7 @@ import java.sql.SQLException;
  *
  * @author juand
  */
-public class ConnectionMySQL {
+public class ConnectionMySQL{
     private String database_name = "pharmacy_database";
     private String user = "root";
     private String password = "0514";

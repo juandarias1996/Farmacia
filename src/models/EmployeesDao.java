@@ -65,14 +65,14 @@ public class EmployeesDao {
             }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al obtener al empleado" + e);
+            JOptionPane.showMessageDialog(null, "Error al obtener al empleado: " + e);
         }
         return employee;
     }
 
     //Registrar empleado
     public boolean registerEmployeeQuery(Employees employee) {
-        String query = "INSERT INTO employees(id, full_name, username, address, telephone, email, password, rol, created"
+        String query = "INSERT INTO employees (id, full_name, username, address, telephone, email, password, rol, created,"
                 + "updated) VALUES(?,?,?,?,?,?,?,?,?,?)";
 
         Timestamp datetime = new Timestamp(new Date().getTime());
@@ -90,10 +90,10 @@ public class EmployeesDao {
             pst.setString(8, employee.getRol());
             pst.setTimestamp(9, datetime);
             pst.setTimestamp(10, datetime);
+            pst.execute();
             return true;
-
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al registrar al empleado" + e);
+            JOptionPane.showMessageDialog(null, "Error al registrar al empleado: " + e);
             return false;
         }
     }
@@ -112,7 +112,6 @@ public class EmployeesDao {
             } else {
                 pst = conn.prepareStatement(query_search_employee);
                 rs = pst.executeQuery();
-
             }
 
             while (rs.next()) {

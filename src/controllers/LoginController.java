@@ -61,7 +61,6 @@ public class LoginController implements ActionListener {
                 }
             } else if (!login_view.txt_username.getText().trim().equals("")) {
                 //Se transfiere el foco al siguiente Jtextflield, Jpasswordfield, etc...
-                JOptionPane.showMessageDialog(null, "Por favor introduzca la contraseña");
                 ((JComponent) ae.getSource()).transferFocus();
             } else {
                 JOptionPane.showMessageDialog(null, "¡Los campos están vacíos!");

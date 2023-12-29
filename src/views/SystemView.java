@@ -4,18 +4,21 @@
  */
 package views;
 import Libs.TextPrompt;
+import controllers.EmployeesController;
 import controllers.SettingsController;
-import java.awt.event.ActionEvent;
+import models.Employees;
+import models.EmployeesDao;
 
 /**
  *
  * @author juand
  */
 public class SystemView extends javax.swing.JFrame {
-
-    /**
-     * Creates new form SystemView
-     */
+    
+    //métodos de los Empleados
+    Employees employee = new Employees();
+    EmployeesDao employeesDao = new EmployeesDao();
+    
     public SystemView() {
         initComponents();
         setSize(1208, 680);//Dimensión de la interfaz
@@ -26,6 +29,10 @@ public class SystemView extends javax.swing.JFrame {
         //Controlador del settings
         SettingsController setting = new SettingsController(this);
         this.repaint();
+        
+        //Controlador de empleados
+        EmployeesController employee_account = new EmployeesController(employee, employeesDao, this);
+        employee_account.listAllEmployees();
         
         //placeholder
         TextPrompt txt_Search_Product = new TextPrompt("Buscar Producto", txt_search_product);
@@ -172,7 +179,7 @@ public class SystemView extends javax.swing.JFrame {
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         txt_employee_id = new javax.swing.JTextField();
-        txt_employee__fullname = new javax.swing.JTextField();
+        txt_employee_fullname = new javax.swing.JTextField();
         txt_employee_username = new javax.swing.JTextField();
         cmb_rol = new javax.swing.JComboBox<>();
         txt_employee_address = new javax.swing.JTextField();
@@ -478,11 +485,6 @@ public class SystemView extends javax.swing.JFrame {
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 340, 60));
 
         btn_photo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Iconos/man.png"))); // NOI18N
-        btn_photo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_photoActionPerformed(evt);
-            }
-        });
         jPanel3.add(btn_photo, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, 80, 65));
 
         btn_logout.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -536,20 +538,10 @@ public class SystemView extends javax.swing.JFrame {
 
         txt_product_code.setBackground(new java.awt.Color(255, 255, 255));
         txt_product_code.setForeground(new java.awt.Color(0, 0, 0));
-        txt_product_code.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_product_codeActionPerformed(evt);
-            }
-        });
         jPanel12.add(txt_product_code, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 46, 165, 30));
 
         txt_product_name.setBackground(new java.awt.Color(255, 255, 255));
         txt_product_name.setForeground(new java.awt.Color(0, 0, 0));
-        txt_product_name.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_product_nameActionPerformed(evt);
-            }
-        });
         jPanel12.add(txt_product_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 89, 165, 30));
 
         txt_product_unit_price.setBackground(new java.awt.Color(255, 255, 255));
@@ -561,11 +553,6 @@ public class SystemView extends javax.swing.JFrame {
         jPanel12.add(txt_product_description, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 46, 165, 30));
 
         cmb_product_category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmb_product_category.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmb_product_categoryActionPerformed(evt);
-            }
-        });
         jPanel12.add(cmb_product_category, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 89, 165, 30));
 
         txt_product_id.setEditable(false);
@@ -584,11 +571,6 @@ public class SystemView extends javax.swing.JFrame {
         btn_update_product.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_update_product.setForeground(new java.awt.Color(0, 0, 0));
         btn_update_product.setText("Modificar");
-        btn_update_product.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_update_productActionPerformed(evt);
-            }
-        });
         jPanel12.add(btn_update_product, new org.netbeans.lib.awtextra.AbsoluteConstraints(715, 88, -1, 30));
 
         btn_delete_product.setBackground(new java.awt.Color(204, 204, 204));
@@ -705,11 +687,6 @@ public class SystemView extends javax.swing.JFrame {
 
         txt_purchase_product_code.setBackground(new java.awt.Color(255, 255, 255));
         txt_purchase_product_code.setForeground(new java.awt.Color(0, 0, 0));
-        txt_purchase_product_code.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_purchase_product_codeActionPerformed(evt);
-            }
-        });
 
         txt_purchase_product_name.setEditable(false);
         txt_purchase_product_name.setBackground(new java.awt.Color(255, 255, 255));
@@ -776,11 +753,6 @@ public class SystemView extends javax.swing.JFrame {
 
         cmb_purchase_supplier.setBackground(new java.awt.Color(255, 255, 255));
         cmb_purchase_supplier.setForeground(new java.awt.Color(55, 55, 55));
-        cmb_purchase_supplier.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmb_purchase_supplierActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -1181,11 +1153,6 @@ public class SystemView extends javax.swing.JFrame {
 
         btn_register_customer.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_register_customer.setText("Registrar");
-        btn_register_customer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_register_customerActionPerformed(evt);
-            }
-        });
 
         btn_update_customer.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_update_customer.setText("Modificar");
@@ -1264,11 +1231,6 @@ public class SystemView extends javax.swing.JFrame {
         jPanel6.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
 
         txt_search_customer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txt_search_customer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_search_customerActionPerformed(evt);
-            }
-        });
         jPanel6.add(txt_search_customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 160, 30));
 
         customers_table.setModel(new javax.swing.table.DefaultTableModel(
@@ -1346,19 +1308,12 @@ public class SystemView extends javax.swing.JFrame {
 
         btn_update_employee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_update_employee.setText("Modificar");
-        btn_update_employee.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_update_employeeActionPerformed(evt);
-            }
-        });
 
         btn_delete_employee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_delete_employee.setText("Eliminar");
 
         btn_cancel_employee.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_cancel_employee.setText("Cancelar");
-
-        txt_employee_password.setText("jPasswordField1");
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -1375,7 +1330,7 @@ public class SystemView extends javax.swing.JFrame {
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cmb_rol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_employee_username, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_employee__fullname, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_employee_fullname, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_employee_id, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1411,7 +1366,7 @@ public class SystemView extends javax.swing.JFrame {
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
                     .addComponent(jLabel29)
-                    .addComponent(txt_employee__fullname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_employee_fullname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_employee_telephone, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_update_employee, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
@@ -1536,11 +1491,6 @@ public class SystemView extends javax.swing.JFrame {
         cmb_supplier_city.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cmb_supplier_city.setForeground(new java.awt.Color(0, 0, 0));
         cmb_supplier_city.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bogotá", "Barranquilla", "Cali", "Medellín" }));
-        cmb_supplier_city.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmb_supplier_cityActionPerformed(evt);
-            }
-        });
 
         txt_supplier_id.setEditable(false);
         txt_supplier_id.setEnabled(false);
@@ -1550,11 +1500,6 @@ public class SystemView extends javax.swing.JFrame {
 
         txt_update_supplier.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txt_update_supplier.setText("Modificar");
-        txt_update_supplier.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_update_supplierActionPerformed(evt);
-            }
-        });
 
         btn_delete_supplier.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_delete_supplier.setText("Eliminar");
@@ -1637,12 +1582,6 @@ public class SystemView extends javax.swing.JFrame {
         jLabel40.setForeground(new java.awt.Color(0, 0, 0));
         jLabel40.setText("Buscar:");
 
-        txt_search_supplier.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_search_supplierActionPerformed(evt);
-            }
-        });
-
         suppliers_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1720,11 +1659,6 @@ public class SystemView extends javax.swing.JFrame {
 
         btn_register_category.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_register_category.setText("Registrar");
-        btn_register_category.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_register_categoryActionPerformed(evt);
-            }
-        });
 
         btn_update_category.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_update_category.setText("Modificar");
@@ -2002,62 +1936,6 @@ public class SystemView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_photoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_photoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_photoActionPerformed
-
-    private void btn_update_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_update_productActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_update_productActionPerformed
-
-    private void cmb_product_categoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_product_categoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmb_product_categoryActionPerformed
-
-    private void cmb_purchase_supplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_purchase_supplierActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmb_purchase_supplierActionPerformed
-
-    private void txt_purchase_product_codeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_purchase_product_codeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_purchase_product_codeActionPerformed
-
-    private void btn_register_customerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_register_customerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_register_customerActionPerformed
-
-    private void txt_search_customerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_search_customerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_search_customerActionPerformed
-
-    private void txt_product_codeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_product_codeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_product_codeActionPerformed
-
-    private void txt_product_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_product_nameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_product_nameActionPerformed
-
-    private void btn_update_employeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_update_employeeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_update_employeeActionPerformed
-
-    private void cmb_supplier_cityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_supplier_cityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmb_supplier_cityActionPerformed
-
-    private void txt_update_supplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_update_supplierActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_update_supplierActionPerformed
-
-    private void txt_search_supplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_search_supplierActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_search_supplierActionPerformed
-
-    private void btn_register_categoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_register_categoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_register_categoryActionPerformed
-
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
         // TODO add your handling code here:
         if(evt.getSource() == btn_logout){
@@ -2263,9 +2141,9 @@ public class SystemView extends javax.swing.JFrame {
     public javax.swing.JTextField txt_customer_id;
     public javax.swing.JTextField txt_customer_telephone;
     public javax.swing.JTextField txt_email_profile;
-    public javax.swing.JTextField txt_employee__fullname;
     public javax.swing.JTextField txt_employee_address;
     public javax.swing.JTextField txt_employee_email;
+    public javax.swing.JTextField txt_employee_fullname;
     public javax.swing.JTextField txt_employee_id;
     public javax.swing.JPasswordField txt_employee_password;
     public javax.swing.JTextField txt_employee_telephone;
