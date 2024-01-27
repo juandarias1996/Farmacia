@@ -6,7 +6,6 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import models.Employees;
@@ -41,6 +40,7 @@ public class LoginController implements ActionListener {
         String pass = String.valueOf(login_view.txt_password.getPassword());
 
         //Se detecta que se presionó el botón ingresar ó se presionó la tecla ENTER estando en Usuario ó en Contraseña
+        //La tecla ENTER esta envevida en los eventos capturados del teclado y entra directo al condicional if
         if (ae.getSource() == login_view.btn_enter || ae.getSource() == login_view.txt_password || ae.getSource() == login_view.txt_username) {
             //Validar que los campos no esten vacíos
             if (!user.equals("") && !pass.equals("")) {

@@ -35,14 +35,19 @@ public class EmployeesController implements ActionListener, MouseListener, KeyLi
         this.employee = employee;
         this.employeeDao = employeeDao;
         this.views = views;
-        //Poner a la interfaz a escuchar al botón Registrar
+        //Escuchar evento del botón Registrar
         this.views.btn_register_employee.addActionListener(this);
+        //Escuchar evento del botón de Modificar
+        this.views.btn_update_employee.addActionListener(this);
+        //Escuchar eventos del mouse
         this.views.employees_table.addMouseListener(this);
+        //Escuchar eventos de teclado
         this.views.txt_search_employee.addKeyListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
+        //Evento del botón Registrar
         if(ae.getSource() == views.btn_register_employee){
             //Verificar si los campos están vacíos
             if(views.txt_employee_id.getText().equals("")
@@ -72,6 +77,37 @@ public class EmployeesController implements ActionListener, MouseListener, KeyLi
                     JOptionPane.showMessageDialog(null, "Ha ocurrido un error al registrar emplead@");
                 }
             }
+        }//Evento del botón Modificar
+        else if(ae.getSource() == views.btn_update_employee){
+            //Verificar si los campos están vacíos
+            if(views.txt_employee_id.getText().equals("")
+                ||views.txt_employee_fullname.getText().equals("")
+                ||views.txt_employee_username.getText().equals("")
+                ||views.txt_employee_address.getText().equals("")
+                ||views.txt_employee_telephone.getText().equals("")
+                ||views.txt_employee_email.getText().equals("")
+                ||views.cmb_rol.getSelectedItem().toString().equals("")){
+                    JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios!");
+            }else{
+                //Realizar la inserción de datos a modificar
+                employee.setId(Integer.parseInt(views.txt_employee_id.getText().trim()));
+                employee.setFull_name(views.txt_employee_fullname.getText().trim());
+                employee.setUsername(views.txt_employee_username.getText().trim());
+                employee.setAddress(views.txt_employee_address.getText().trim());
+                employee.setTelephone(views.txt_employee_telephone.getText().trim());
+                employee.setEmail(views.txt_employee_email.getText().trim());
+                employee.setPassword(String.valueOf(views.txt_employee_password.getPassword()));
+                employee.setRol(views.cmb_rol.getSelectedItem().toString());
+
+                if(employeeDao.updateEmployeeQuery(employee)){
+                    cleanTable();
+                    listAllEmployees();
+                    views.btn_register_employee.setEnabled(true);
+                    JOptionPane.showMessageDialog(null, "Datos del empleado modificados con exito!");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Ha ocurrido un error al modificar los datos del empleado!");
+                }
+            }
         }
     }
     
@@ -93,7 +129,8 @@ public class EmployeesController implements ActionListener, MouseListener, KeyLi
             }
         }
     }
-
+    
+    //Evento de click del mouse
     @Override
     public void mouseClicked(MouseEvent me) {
         if(me.getSource() == views.employees_table){
@@ -107,8 +144,8 @@ public class EmployeesController implements ActionListener, MouseListener, KeyLi
             views.txt_employee_email.setText(views.employees_table.getValueAt(row, 5).toString());
             views.cmb_rol.setSelectedItem(views.employees_table.getValueAt(row, 6).toString());
             
-            //Deshabilitar
-            views.txt_employee_id.setEditable(false);
+            //Deshabilita
+            views.txt_employee_id.setEnabled(false);
             views.txt_employee_password.setEnabled(false);
             views.btn_register_employee.setEnabled(false);
         }
@@ -132,6 +169,10 @@ public class EmployeesController implements ActionListener, MouseListener, KeyLi
 
     @Override
     public void keyTyped(KeyEvent ke) {
+         if(ke.getSource() == views.txt_search_employee){
+            cleanTable();
+            listAllEmployees();
+        }
     }
 
     @Override
@@ -140,10 +181,6 @@ public class EmployeesController implements ActionListener, MouseListener, KeyLi
 
     @Override
     public void keyReleased(KeyEvent ke) {
-        if(ke.getSource() == views.txt_search_employee){
-            cleanTable();
-            listAllEmployees();
-        }
     }
     
     public void cleanTable(){

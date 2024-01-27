@@ -150,8 +150,8 @@ public class EmployeesDao {
             pst.setString(6, employee.getRol());
             pst.setTimestamp(7, datetime);
             pst.setInt(8, employee.getId());
+            pst.execute();
             return true;
-
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al modificar los datos del empleado" + e);
             return false;
