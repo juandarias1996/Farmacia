@@ -31,6 +31,7 @@ public class LoginController implements ActionListener {
         this.login_view.btn_enter.addActionListener(this);
         this.login_view.txt_password.addActionListener(this);
         this.login_view.txt_username.addActionListener(this);
+        this.login_view.chk_showpassword.addActionListener(this);
     }
 
     @Override
@@ -60,10 +61,14 @@ public class LoginController implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrect@");
                 }
             } else if (!login_view.txt_username.getText().trim().equals("")) {
-                //Se transfiere el foco al siguiente Jtextflield, Jpasswordfield, etc...
-                ((JComponent) ae.getSource()).transferFocus();
+                if (login_view.txt_password.requestFocusInWindow()) {
+                    //Se transfiere el foco al siguiente Jtextflield, Jpasswordfield, etc...
+                    ((JComponent) ae.getSource()).transferFocus();
+                } else {
+                    JOptionPane.showMessageDialog(null, "¡Todos los campos son obligatorios!");
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "¡Los campos están vacíos!");
+                JOptionPane.showMessageDialog(null, "¡Todos los campos son obligatorios!");
             }
         }
     }

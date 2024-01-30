@@ -4,6 +4,7 @@
  */
 package views;
 
+import Libs.Imgsize;
 import Libs.TextPrompt;
 import controllers.LoginController;
 import static java.awt.event.KeyEvent.VK_BACK_SPACE;
@@ -31,7 +32,7 @@ public class LoginView extends javax.swing.JFrame {
         initComponents();
         //Controlador del login
         LoginController employee_login = new LoginController(employee, employee_dao,this);
-        setSize(930, 415);
+        setSize(930, 430);
         setResizable(false);
         setTitle("Ingresar al sistema");
         setLocationRelativeTo(null);
@@ -40,6 +41,9 @@ public class LoginView extends javax.swing.JFrame {
         //Placeholders
         TextPrompt txt_Username = new TextPrompt("Usuario", txt_username);
         TextPrompt txt_Password = new TextPrompt("Contraseña", txt_password);
+        
+        //Redimensionar imagen al tamaño del JLabel
+        Imgsize logoBASA = new Imgsize(this.manImage, "./src/images/Iconos/employee.png", this);
     }
 
     /**
@@ -58,6 +62,7 @@ public class LoginView extends javax.swing.JFrame {
         txt_username = new javax.swing.JTextField();
         txt_password = new javax.swing.JPasswordField();
         chk_showpassword = new javax.swing.JCheckBox();
+        manImage = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         Wallpaper = new javax.swing.JLabel();
 
@@ -105,6 +110,7 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(chk_showpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
+        jPanel1.add(manImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 50, 50));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 490, 420));
 
@@ -187,6 +193,7 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel manImage;
     public javax.swing.JPasswordField txt_password;
     public javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
